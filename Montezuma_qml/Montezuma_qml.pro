@@ -20,4 +20,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-QMAKE_POST_LINK += $$quote(cp $$PWD/config.json config.json)
+#QMAKE_POST_LINK += $$quote(cp $$PWD/config.json config.json)

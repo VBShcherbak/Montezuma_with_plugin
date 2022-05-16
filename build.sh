@@ -23,10 +23,14 @@ fi
 
 cd $BUILD_DIR
 
-$QMAKE_FILE ../Montezuma_plugin
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+#$QMAKE_FILE ../Montezuma_plugin
+$QMAKE_FILE ${SCRIPT_DIR}/Montezuma_plugin
 make
 
-$QMAKE_FILE ../Montezuma_qml
+#QMAKE_FILE ../Montezuma_qml
+$QMAKE_FILE ${SCRIPT_DIR}/Montezuma_qml
 make
 
 ./Montezuma_qml

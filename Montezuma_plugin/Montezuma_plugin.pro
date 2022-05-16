@@ -20,5 +20,5 @@ DISTFILES = qmldir
 
 DESTDIR = plugins/montezuma
 
-QMAKE_POST_LINK += $$quote(cp $$PWD/qmldir $$DESTDIR/qmldir)
+QMAKE_POST_LINK += $$quote(cp $$PWD/qmldir $$DESTDIR/qmldir; cp $$PWD/config.json config.json)
 

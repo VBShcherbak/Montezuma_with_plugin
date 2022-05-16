@@ -6,7 +6,7 @@ import plugins.montezuma 1.0
 Window {
     id: root
     width: montezuma.boardWidth
-    height: montezuma.boardHeight * 1.2
+    height: montezuma.boardHeight
     color: "#FFECD5"
     visible: true
     title: qsTr("Montezuma")
@@ -33,7 +33,7 @@ Window {
                     id: wrapper
                     width: GridView.view.cellWidth - 2
                     height: width
-                    color: root.color
+                    color: "transparent"
 
                     Rectangle {
                         id: ball
@@ -50,10 +50,10 @@ Window {
                         onFailorChanged: if (failor) fail.start();
                         property bool fader: ballVisible
                         onFaderChanged: if (!fader) fade.start();
-//                        Text {
-//                            id: name
-//                            text: index
-//                        }
+                        Text {
+                            id: name
+                            text: index
+                        }
                         states: [
                             State {
                                 name: "big"
@@ -96,24 +96,31 @@ Window {
                                 to: 1
                                 duration: 300
                             }
-                            onRunningChanged: {
-                               if (!running) {
-                                   ball.failor = false;
-                               }
-                            }
+//                            onRunningChanged: {
+//                               if (!running) {
+//                                   ball.failor = false;
+//                               }
+//                            }
                         }
                         MouseArea {
                             id: mouseArea
                             anchors.fill: parent
                             onClicked: {
                                 montezuma.mark(index);
+//                                finish.visible = true
                            }
                       }
                  }
             }
             move: Transition {
-                NumberAnimation { properties: "x,y"; duration: 300 }
+                NumberAnimation { properties: "y"; duration: 300 }
             }
+            displaced: Transition {
+                NumberAnimation { properties: "x"; duration: 300 }
+            }
+            populate: Transition {
+                    NumberAnimation { properties: "x,y"; duration: 500 }
+                }
             add: Transition {
                 NumberAnimation {
                     property: "y"
@@ -127,13 +134,22 @@ Window {
                 }
             }
         }
-        Text {
+        Rectangle {
             id: finish
-            text: "NO VARIANT"
+            width: parent.width - parent.width / 5
+            height: width / 4
             anchors.centerIn: parent
-            font.pixelSize: parent.width/10
-            color: "blue"
+            border.color: "#A4856C"
+            border.width: 2
+            radius: width / 5
+            color: "#FFF0E5"
             visible: false
+            Text {
+                text: "NO VARIANT"
+                anchors.centerIn: finish
+                font.pixelSize: finish.height / 2
+                color: "blue"
+            }
         }
     }
 
@@ -147,7 +163,7 @@ Window {
         id: header
         //z: 1
         width: root.width
-        height: width / 5
+        height: 100
         color: root.color
 
         Row {
@@ -164,7 +180,7 @@ Window {
                     Text {
                         id: move
                         anchors.horizontalCenter: parent.horizontalCenter
-                        font.pixelSize: montezuma.boardHeight / 25
+                        font.pixelSize: header.height / 5
                         color: "#805D43"
                         text: "move"
                     }
@@ -185,7 +201,7 @@ Window {
                 Button {
                     id: mix
                     width: parent.width
-                    height: width/2
+                    height: header.height / 3 * 2
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     Text {
@@ -235,7 +251,12 @@ Window {
                 }
             }
         }
+        Component.onCompleted: {
+            console.log("header", width, height);
+        }
     }
-
+    Component.onCompleted: {
+        console.log("window", width, height);
+    }
 }
 
