@@ -10,7 +10,6 @@ struct Chunk {
     int begin;
     int end;
     bool found;
-    //bool variant;
 };
 
 struct Ball {
@@ -26,7 +25,6 @@ class Montezuma : public QAbstractListModel {
     Q_PROPERTY(int boardHeight READ getBoardHeight CONSTANT);
     Q_PROPERTY(int columns READ getColumns CONSTANT);
     Q_PROPERTY(int markIndex READ getMarkIndex WRITE setMarkIndex NOTIFY markIndexChanged)
-    //Q_PROPERTY(bool fail READ getFail WRITE setFail NOTIFY failChanged)
     Q_PROPERTY(int score READ getScore WRITE setScore NOTIFY scoreChanged);
     Q_PROPERTY(int move READ getMove WRITE setMove NOTIFY moveChanged)
 
@@ -50,8 +48,6 @@ public:
     void setMove(int move);
     int getScore() const;
     void setScore(int score);
-//    bool getFail() const;
-//    void setFail(bool);
     bool validation(int index);
     Q_INVOKABLE void downfall();
     Q_INVOKABLE void downfallVertical(int index);
@@ -76,9 +72,9 @@ private:
 signals:
     void gameOver();
     void gameStart();
-    void markIndexChanged();    //int index);
-    void scoreChanged();//int score);
-    void moveChanged();//int move);
+    void markIndexChanged();
+    void scoreChanged();
+    void moveChanged();
     void failChanged();
 
 private:
@@ -95,12 +91,10 @@ private:
     int m_move;
     int m_score;
     int m_level;
-    //bool m_fail;
     Chunk m_horizontal;
     Chunk m_vertical;
     bool m_variant;
     QTimer *timer;
 };
-
 
 #endif // MONTEZUMA_H
