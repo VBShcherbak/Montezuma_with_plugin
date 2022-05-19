@@ -5,7 +5,7 @@ import plugins.montezuma 1.0
 
 Window {
     id: root
-    width: montezuma.boardWidth
+    width: Math.max(montezuma.boardWidth, 250)
     height: montezuma.boardHeight
     color: "#FFECD5"
     visible: true
@@ -14,8 +14,8 @@ Window {
     Rectangle {
         id: background
         x: 5
-        height: root.height - header.height - 10
         width: root.width - 10
+        height: root.height - 110
         color: root.color
         border.color: "#90674B"
         border.width: 2
@@ -81,6 +81,15 @@ Window {
                                }
                             }
                         }
+//                        XAnimator on x {
+//                                duration: 1000
+//                            }
+//                        Behavior on x {
+//                            NumberAnimation {
+//                                id: animationX;
+//                                duration: 500;
+//                            }
+//                        }
                         SequentialAnimation {
                             id: fail
                             loops: 2
@@ -113,11 +122,12 @@ Window {
                  }
             }
             move: Transition {
-                NumberAnimation { properties: "y"; duration: 300 }
+                NumberAnimation { properties: "x,y"; duration: 300 }
             }
             displaced: Transition {
-                NumberAnimation { properties: "x"; duration: 300 }
+                NumberAnimation { properties: "x,y"; duration: 300 }
             }
+
             populate: Transition {
                     NumberAnimation { properties: "x,y"; duration: 500 }
                 }

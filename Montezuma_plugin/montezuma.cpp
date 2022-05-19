@@ -294,18 +294,18 @@ void Montezuma::move(int index) {
 //mark->move->downfall->opacityAnimation->downfallVertical->addTransitionAnimation->forward->downfall...
 void Montezuma::downfall() {
     int score = 0;
-    if (m_horizontal.found) {
-        for (int i = m_horizontal.begin; i <= m_horizontal.end; i++) {
-            m_allChunks.insert(i);
-        }
-        m_horizontal.found = false;
-    }
-    if (m_vertical.found) {
-        for (int i = m_vertical.begin; i <= m_vertical.end; i+=m_columns) {
-            m_allChunks.insert(i);
-        }
-        m_vertical.found = false;
-    }
+//    if (m_horizontal.found) {
+//        for (int i = m_horizontal.begin; i <= m_horizontal.end; i++) {
+//            m_allChunks.insert(i);
+//        }
+//        m_horizontal.found = false;
+//    }
+//    if (m_vertical.found) {
+//        for (int i = m_vertical.begin; i <= m_vertical.end; i+=m_columns) {
+//            m_allChunks.insert(i);
+//        }
+//        m_vertical.found = false;
+//    }
 
     m_roles.append(Roles::Visible);
     QSet<int>::iterator it;
@@ -422,7 +422,7 @@ Chunk Montezuma::findVerticalChunk(int index) {
 }
 
 void Montezuma::timerHit() {
-    downfall();
+    forward();
     timer->stop();
 }
 
